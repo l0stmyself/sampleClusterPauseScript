@@ -1,6 +1,8 @@
-# MongoDB Atlas Cluster Manager
+# MongoDB Atlas Sample Pause Script
 
-A simple Python utility to check, pause, and resume MongoDB Atlas clusters using the Atlas API.
+A simple Python utility to check, pause, and resume MongoDB Atlas clusters using the Atlas API. 
+
+NOTE: THIS IS NOT PRODUCTION READY. IT IS A SAMPLE TO THAT CAN BE MODIFIED AND USED IN YOUR ENVIRONMENT. MONGODB DOES NOT TAKE ANY RESPONSIBILITY FOR THIS SCRIPT AND IT'S FUNCTIONALITY
 
 ## Overview
 
