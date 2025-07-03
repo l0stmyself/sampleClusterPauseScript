@@ -63,6 +63,22 @@ def update_cluster_state(pause: bool):
         response.raise_for_status()
         action_past_tense = "paused" if pause else "resumed"
         logging.info(f"Cluster {action_past_tense} successfully.")
+    except requests.exceptions.HTTPError as e:
+        error_details = {}
+        try:
+            error_details = e.response.json()
+        except json.JSONDecodeError:
+            # Not a JSON response, just log the text and exit
+            logging.error(f"Error updating cluster state: {e}. Details: {e.response.text}")
+            return
+
+        error_code = error_details.get("errorCode")
+        if error_code == "CANNOT_PAUSE_RECENTLY_RESUMED_CLUSTER":
+            logging.warning(
+                f"Could not pause cluster: {error_details.get('detail', 'Atlas policy prevents pausing a recently resumed cluster.')}"
+            )
+        else:
+            logging.error(f"Error updating cluster state: {e}. Details: {error_details}")
     except requests.exceptions.RequestException as e:
         logging.error(f"Error updating cluster state: {e}")
 
