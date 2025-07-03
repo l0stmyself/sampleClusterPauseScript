@@ -6,7 +6,11 @@ A Python utility to automatically pause and resume a MongoDB Atlas cluster based
 
 ## Overview
 
-This tool automates the process of pausing and resuming your Atlas cluster. It is timezone-aware, converting the server's UTC time to Indian Standard Time (IST) before checking against the schedule.
+This tool automates the process of pausing and resuming your Atlas cluster based on a schedule.
+
+**Timezone Handling:**
+- **Python version (`main.py`):** Assumes the machine it runs on is already set to **IST**.
+- **Bash version (`main.sh`):** Assumes the server runs in **UTC** and converts the time to **IST** for checks.
 
 Key logic:
 
@@ -19,7 +23,7 @@ Key logic:
 - Python 3.6+
 - A MongoDB Atlas account
 - An Atlas API key with `Project Cluster Manager` role or higher.
-- The server running this script is assumed to be in UTC.
+
 
 ## Installation
 
@@ -51,7 +55,7 @@ Create a `config.json` file in the root directory. The script will not run witho
     "end_time": "20:00"
 }
 ```
-- `start_time` / `end_time`: The active window for your cluster in IST, specified in `HH:MM` format (24-hour clock).
+- `start_time` / `end_time`: The active window for your cluster, specified in `HH:MM` format (24-hour clock). The schedule is interpreted as IST.
 
 ## Scheduling with Cron
 
