@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 from datetime import datetime, time
 
 import requests
@@ -9,9 +10,13 @@ from requests.auth import HTTPDigestAuth
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Build the absolute path to the config file
+script_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(script_dir, "config.json")
+
 # Load configuration from config.json
 try:
-    with open("config.json") as f:
+    with open(config_path) as f:
         config = json.load(f)
 except FileNotFoundError:
     logging.error("Error: config.json not found. Please create it based on the README.")

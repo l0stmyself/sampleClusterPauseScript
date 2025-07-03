@@ -78,6 +78,8 @@ To automate this script, you can set up a cron job to run it periodically (e.g.,
     - `/path/to/your/script/main.py`: The absolute path to the `main.py` script.
     - `>> /path/to/your/script/cron.log 2>&1`: Appends both standard output and errors to a log file, which is essential for troubleshooting.
 
+    **Important Note on Cron:** Cron jobs typically run from your user's home directory, not the script's directory. This can cause errors if a script uses relative paths to find files (like `config.json`). This script has been specifically designed to avoid this problem by locating its configuration file relative to its own absolute path, so you do not need to `cd` into the script's directory in your cron command.
+
 ## Scheduling with Cron (Bash)
 
 As an alternative to Python, you can also schedule the `main.sh` script.
